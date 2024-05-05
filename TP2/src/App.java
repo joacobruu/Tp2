@@ -1,22 +1,9 @@
-import Gestor.Gestor;
-import modelo.Empleado;
+import java.util.Scanner;
+
+import scanner.Menu;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-        Empleado joaquin = new Empleado("joaquin", "neyer", 1139007490, 1200000);
-        Empleado laura = new Empleado("Laura", "pepepe", 1139007490, 1231300);
-
-        Gestor gestor = new Gestor();
-
-        gestor.agregarEmpleado(joaquin);
-        gestor.agregarEmpleado(laura);
-
-        gestor.getListaEmpleados();
-        gestor.eliminarEmpleado(laura.getId());
-        gestor.getListaEmpleados();
-
-        /*
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
 
@@ -41,6 +28,6 @@ public class App {
                 default:
                     System.out.println("Opcion invalida");
             }
-        } while (opcion !=4); */
+        } while (opcion !=4);
     }
 }

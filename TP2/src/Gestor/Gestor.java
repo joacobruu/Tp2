@@ -24,7 +24,7 @@ public class Gestor {
   public void getListaEmpleados() {
     int i = 0;
 
-        for (Empleado empleado : this.listaEmpleados) {
+        for (Empleado empleado : listaEmpleados) {
             i++;
 
             System.out.println(i + ")" + "\n" +
@@ -34,13 +34,17 @@ public class Gestor {
             "Salario: " + empleado.getSalario() + "\n");
         };
   }
+
+  public Empleado getEmpleado(int i) {
+    return listaEmpleados.get(i-1);
+  }
   
   public void agregarEmpleado(Empleado empleado) {
     listaEmpleados.add(empleado);
   }
 
   public void eliminarEmpleado(UUID id){
-    for (Empleado empleadoID : this.listaEmpleados) {
+    for (Empleado empleadoID : listaEmpleados) {
       if (empleadoID.getId().equals(id)) {
         listaEmpleados.remove(empleadoID);
         System.out.println("Empleado: " + empleadoID.getNombre() + ", ha sido borrado.");
@@ -52,7 +56,7 @@ public class Gestor {
   public void getListaClientes() {
     int i = 0;
 
-        for (Cliente cliente : this.listaClientes) {
+        for (Cliente cliente : listaClientes) {
             i++;
 
             System.out.println(i + ")" + "\n" +
@@ -62,12 +66,16 @@ public class Gestor {
         };
   }
 
+  public Empleado getCliente(int i) {
+    return listaEmpleados.get(i-1);
+  }
+
   public void agregarCliente(Cliente cliente) {
     listaClientes.add(cliente);
   }
 
   public void eliminarCliente(UUID id){
-    for (Cliente clienteID : this.listaClientes) {
+    for (Cliente clienteID : listaClientes) {
       if (clienteID.getId().equals(id)) {
         listaClientes.remove(clienteID);
         System.out.println("Cliente: " + clienteID.getNombre() + ", ha sido borrado.");
@@ -76,19 +84,38 @@ public class Gestor {
     }
   }
 
-  public ArrayList<Pedido> getListaPedidos() {
-    return listaPedidos;
+  public void getListaPedidos() {
+    int i = 0;
+    for (Pedido pedido : listaPedidos) {
+      i++;
+      System.out.println(i + ")" + "\n" +
+            "ID: " + pedido.getId() + "\n" +
+            "Cliente: " + pedido.getCliente() + "\n" +
+            "Fecha: " + pedido.getFecha() + "\n" +
+            "Productos: " + pedido.getProductos() + "\n" +
+            "Total: $" + pedido.getTotal() + "\n");
+    }
   }
 
-  public void setListaPedidos(ArrayList<Pedido> listaPedidos) {
-    this.listaPedidos = listaPedidos;
+  public void eliminarPedido(UUID id) {
+    for (Pedido pedido : listaPedidos) {
+      if (pedido.getId().equals(id)) {
+        listaPedidos.remove(pedido);
+        System.out.println("Pedido eliminado");
+        break;
+      }
+    }
   }
 
-  public ArrayList<Producto> getListaProductos() {
-    return listaProductos;
-  }
+  public void getListaProductos() {
+    int i = 0;
 
-  public void setListaProductos(ArrayList<Producto> listaProductos) {
-    this.listaProductos = listaProductos;
+        for (Producto producto : listaProductos) {
+            i++;
+
+            System.out.println(i + ")" + "\n" +
+            "Nombre: " + producto.getNombre() + "\n" +
+            "Precio: " + producto.getPrecio() + "\n");
+        };
   }
 }

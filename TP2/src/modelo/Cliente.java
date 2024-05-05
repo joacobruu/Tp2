@@ -4,18 +4,25 @@ import java.util.ArrayList;
 
 public class Cliente extends Persona {
 
-  private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+  private ArrayList<Pedido> pedidos;
 
   public Cliente(String nombre, String direccion, int contacto, ArrayList<Pedido> pedidos) {
     super(nombre, direccion, contacto);
-    this.pedidos = pedidos;
+    this.pedidos = new ArrayList<Pedido>();
   }
 
-  public ArrayList<Pedido> getPedidos() {
-    return pedidos;
+  public Cliente(String nombre, String direccion, int contacto) {
+    super(nombre, direccion, contacto);
+    this.pedidos = new ArrayList<Pedido>();
   }
-
-  public void setPedidos(ArrayList<Pedido> pedidos) {
-    this.pedidos = pedidos;
+  public void getPedidos() {
+    int i = 0;
+    for (Pedido pedido : pedidos) {
+      i++;
+      System.out.println(i + ")" + "\n" +
+            "ID: " + pedido.getId() + "\n" +
+            "Fecha: " + pedido.getFecha() + "\n" +
+            "Total: " + pedido.getTotal() + "\n");
+    }
   }
 }
