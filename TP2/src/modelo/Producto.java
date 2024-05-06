@@ -6,8 +6,8 @@ public class Producto {
   private UUID id;
   private int precio;
   private String nombre;
-  public Producto(UUID id, int precio, String nombre) {
-    this.id = id;
+  public Producto(int precio, String nombre) {
+    this.id = UUID.randomUUID();
     this.precio = precio;
     this.nombre = nombre;
   }

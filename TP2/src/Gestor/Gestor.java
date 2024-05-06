@@ -66,8 +66,8 @@ public class Gestor {
         };
   }
 
-  public Empleado getCliente(int i) {
-    return listaEmpleados.get(i-1);
+  public Cliente getCliente(int i) {
+    return listaClientes.get(i-1);
   }
 
   public void agregarCliente(Cliente cliente) {
@@ -97,6 +97,26 @@ public class Gestor {
     }
   }
 
+  public Pedido getPedido(int i) {
+    return listaPedidos.get(i-1);
+  }
+
+  public void agregarPedido(Pedido pedido, Cliente cliente) {
+    listaPedidos.add(pedido);
+    cliente.agregarPedido(pedido);
+  }
+
+  public void pedidoRealizado(UUID id) {
+    for (Pedido pedido : listaPedidos) {
+      if (pedido.getId() == id) {
+        pedido.setRealizado(true);
+        System.out.println("Pedido marcado como realizado");
+      } else {
+        System.out.println("El pedido ya se encuentra completado");
+      }
+    }
+  }
+
   public void eliminarPedido(UUID id) {
     for (Pedido pedido : listaPedidos) {
       if (pedido.getId().equals(id)) {
@@ -117,5 +137,17 @@ public class Gestor {
             "Nombre: " + producto.getNombre() + "\n" +
             "Precio: " + producto.getPrecio() + "\n");
         };
+  }
+
+  public Producto getProducto(int i){
+    return listaProductos.get(i-1);
+  }
+
+  public void agregarProducto(Producto producto) {
+    listaProductos.add(producto);
+  }
+
+  public void eliminarProducto(int i) {
+    listaProductos.remove(i-1);
   }
 }

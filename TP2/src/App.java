@@ -9,9 +9,10 @@ public class App {
 
         int opcion;
         do {
-            opcion = menu.MenuPrincipal();
             menu.limpiarBuffer();
+            menu.MenuPrincipal();
 
+            opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
                     menu.MenuEmpleados();

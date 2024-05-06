@@ -15,6 +15,11 @@ public class Cliente extends Persona {
     super(nombre, direccion, contacto);
     this.pedidos = new ArrayList<Pedido>();
   }
+
+  public void agregarPedido(Pedido pedido) {
+    pedidos.add(pedido);
+  }
+
   public void getPedidos() {
     int i = 0;
     for (Pedido pedido : pedidos) {

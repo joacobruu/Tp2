@@ -10,12 +10,14 @@ public class Pedido {
   private String fecha;
   private UUID id;
   private Cliente cliente;
+  private boolean realizado;
   
-  public Pedido(ArrayList<Producto> productos, String fecha, UUID id, Cliente cliente) {
+  public Pedido(ArrayList<Producto> productos, Cliente cliente) {
     this.productos = new ArrayList<Producto>();
     this.fecha = DateFormat.getInstance().format(new Date());
-    this.id = id;
+    this.id = UUID.randomUUID();
     this.cliente = cliente;
+    this.realizado = false;
   }
   public String getProductos() {
     int i = 0;
@@ -46,5 +48,11 @@ public class Pedido {
   }
   public Cliente getCliente() {
     return cliente;
+  }
+  public boolean isRealizado() {
+    return realizado;
+  }
+  public void setRealizado(boolean realizado) {
+    this.realizado = realizado;
   }
 }
