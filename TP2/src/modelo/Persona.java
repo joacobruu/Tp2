@@ -1,5 +1,6 @@
-package modelo;
+/* Clase Persona que se utilizara como modelo para poder crear las distintas subclases de Cliente y Empleado  */
 
+package modelo;
 import java.util.UUID;
 
 public class Persona {
@@ -20,24 +21,10 @@ public class Persona {
   public String getNombre() {
     return nombre;
   }
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
   public String getDireccion() {
     return direccion;
-  }
-  public void setDireccion(String direccion) {
-    this.direccion = direccion;
   }
   public int getContacto() {
     return contacto;
   }
-  public void setContacto(int contacto) {
-    this.contacto = contacto;
-  }
-  @Override
-  public String toString() {
-    return "Persona [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", contacto="
-        + contacto + "]";
-  }  
 }

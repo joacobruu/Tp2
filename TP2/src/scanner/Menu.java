@@ -1,35 +1,71 @@
-package scanner;
+/* Clase Menu, esta clase se encarga del control del menu y la interaccion por teclado con el usuario */
 
-import java.util.ArrayList;
+package scanner;
 import java.util.Scanner;
 
 import Gestor.Gestor;
 import modelo.Cliente;
 import modelo.Empleado;
-import modelo.Pedido;
 import modelo.Producto;
 
 public class Menu {
-  private Scanner scanner;
-  private Gestor gestor = new Gestor();
+  private Scanner scanner = new Scanner(System.in); //Inicializo el Scanner para poder leer el input por teclado del usuario
+  private Gestor gestor = new Gestor();  //Inicializo la clase Gestor
 
   public Menu() {
     this.scanner = new Scanner(System.in);
   }
 
+  //Menu principal
   public void MenuPrincipal() {
-    System.out.println("\n---- Menu ----");
-    System.out.println("1) Empleados");
-    System.out.println("2) Clientes");
-    System.out.println("3) Pedidos");
-    System.out.println("4) Productos");
-    System.out.println("5) Salir");
+    int opcion = 0; //Inicializo la variable opcion para poder manejar las distintas secciones del menu a travez del scanner
+
+    //DoWhile para mostrar el menu principal y sus distintas opciones
+    do {
+      //Muestro en consola las distintas opcines del menu
+      System.out.println("\n---- Menu ----");
+      System.out.println("1) Empleados");
+      System.out.println("2) Clientes");
+      System.out.println("3) Pedidos");
+      System.out.println("4) Productos");
+      System.out.println("5) Salir");
+      System.out.println(" Eliga una opcion");
+      opcion = scanner.nextInt(); //Leo el input que realizo el usuario
+
+      //Switch para las distintas opciones del menu acorde al input del usuario y poder acceder a los distintos sub-menus y sus opciones
+        switch (opcion) {
+          case 1:
+          limpiarBuffer(); //Metodo para limpiar el buffer del scanner y poder tomar el nuevo input del usuario
+              MenuEmpleados(); //Metodo para mostrar el menu de Empleados
+              break;
+          case 2:
+          limpiarBuffer();
+              MenuClientes(); //Metodo para mostrar el menu de Cliente
+              break;
+          case 3:
+          limpiarBuffer();
+              MenuPedidos(); //Metodo para mostrar el menu de Pedidos
+              break;
+          case 4:
+          limpiarBuffer();
+              MenuProductos(); //Metodo para mostrar el menu de Productos
+              break;
+          case 5:
+          limpiarBuffer();
+              System.out.println("Saliendo del programa...");
+              break;
+          default:
+              System.out.println("Opcion invalida");
+              break;
+      }
+      } while (opcion != 5);
+            
   }
 
+  //Menu de empleados
   public void MenuEmpleados() {
-    limpiarBuffer();
     int opcion;
-
+    do {
     System.out.println("\n---- Empleados ----");
     System.out.println("1) Mostrar empleados");
     System.out.println("2) Agregar empleado");
@@ -37,94 +73,111 @@ public class Menu {
     System.out.println("4) Atras");
 
     opcion = scanner.nextInt();
-    switch (opcion) {
-      case 1:
-        gestor.getListaEmpleados();
-        break;
-      case 2:
-        String nombre;
-        String direccion;
-        int contacto;
-        int salario;
+      switch (opcion) {
+        case 1:
+          limpiarBuffer();
+          //Metodo para mostrar los empleados actuales
+          gestor.getListaEmpleados();
+          break;
+        case 2:
+          limpiarBuffer();
 
-        System.out.println("\nIngrese el nombre: ");
-        nombre = scanner.nextLine();
-        System.out.println("\nIngrese la direccion: ");
-        direccion = scanner.nextLine();
-        System.out.println("\nIngrese un telefono de contacto: ");
-        contacto = scanner.nextInt();
-        System.out.println("\nIngrese el salario: ");
-        salario = scanner.nextInt();
+          //Declaro nuevas variables para guardar los datos que ingresa el usuario por teclado
+          String nombre;
+          String direccion;
+          int contacto;
+          int salario;
+  
+          System.out.println("\nIngrese el nombre: ");
+          nombre = scanner.nextLine();
+          System.out.println("\nIngrese la direccion: ");
+          direccion = scanner.nextLine();
+          System.out.println("\nIngrese un telefono de contacto: ");
+          contacto = scanner.nextInt();
+          System.out.println("\nIngrese el salario: ");
+          salario = scanner.nextInt();
 
-        Empleado nuevoEmpleado = new Empleado(nombre, direccion, contacto, salario);
+          //Una vez obtenidos cada uno de los datos, creo un nuevo empleado a travez del contructor de la clase Empleado
+          Empleado nuevoEmpleado = new Empleado(nombre, direccion, contacto, salario);
 
-        gestor.agregarEmpleado(nuevoEmpleado);
-        break;
-      case 3:
-        gestor.getListaEmpleados();
-        System.out.println("Seleccione el empleado a eliminar: ");
-        int i  = scanner.nextInt();
-        gestor.eliminarEmpleado(gestor.getEmpleado(i).getId());
-        break;
-      case 4:
-        MenuPrincipal();
-        break;
-      default:
-      System.out.println("Opcion invalida.");
-        break;
-    }
+          //Agrego este nuevo empleado a la lista de empleados
+          gestor.agregarEmpleado(nuevoEmpleado);
+          break;
+        case 3:
+          limpiarBuffer();
+          gestor.getListaEmpleados();
+          System.out.println("Seleccione el empleado a eliminar: ");
+          int i  = scanner.nextInt(); //Inicializo una variable para poder saber que empleado selecciono el unsuario
+          gestor.eliminarEmpleado(gestor.getEmpleado(i).getId()); //Metodo para eliminar el empleado seleccionado
+          break;
+        case 4:
+          limpiarBuffer();
+          MenuPrincipal();
+          break;
+        default:
+        System.out.println("Opcion invalida.");
+          break;
+      }
+    } while (opcion != 4);
+    
   }
 
   public void MenuClientes() {
-    limpiarBuffer();
-    int opcion;
-
-    System.out.println("\n---- Clientes ----");
-    System.out.println("1) Mostrar clientes");
-    System.out.println("2) Agregar cliente");
-    System.out.println("3) Borrar cliente");
-    System.out.println("4) Atras");
-
-    opcion = scanner.nextInt();
-    switch (opcion) {
-      case 1:
-        gestor.getListaClientes();
-        break;
-      case 2:
-        String nombre;
-        String direccion;
-        int contacto;
-
-        System.out.println("\nIngrese el nombre: ");
-        nombre = scanner.nextLine();
-        System.out.println("\nIngrese la direccion: ");
-        direccion = scanner.nextLine();
-        System.out.println("\nIngrese un telefono de contacto: ");
-        contacto = scanner.nextInt();
-
-        Cliente nuevoCliente = new Cliente(nombre, direccion, contacto);
-
-        gestor.agregarCliente(nuevoCliente);
-        break;
-      case 3:
-        gestor.getListaClientes();
-        System.out.println("Seleccione el cliente a eliminar: ");
-        int i  = scanner.nextInt();
-        gestor.eliminarCliente(gestor.getCliente(i).getId());
-        break;
-      case 4:
-        MenuPrincipal();
-        break;
-      default:
-        System.out.println("Opcion invalida.");
-        break;
-    }
+    int opcion = 0;
+    do {
+      System.out.println("\n---- Clientes ----");
+      System.out.println("1) Mostrar clientes");
+      System.out.println("2) Agregar cliente");
+      System.out.println("3) Borrar cliente");
+      System.out.println("4) Atras");
+  
+      opcion = scanner.nextInt();
+      switch (opcion) {
+        case 1:
+          limpiarBuffer();
+          gestor.getListaClientes();
+          break;
+        case 2:
+          limpiarBuffer();
+          String nombre;
+          String direccion;
+          int contacto;
+  
+          System.out.println("\nIngrese el nombre: ");
+          nombre = scanner.nextLine();
+          System.out.println("\nIngrese la direccion: ");
+          direccion = scanner.nextLine();
+          System.out.println("\nIngrese un telefono de contacto: ");
+          contacto = scanner.nextInt();
+  
+          //Una vez obtenidos los datos creo un nuevo cliente a partir del constructor de la clase Cliente
+          Cliente nuevoCliente = new Cliente(nombre, direccion, contacto);
+  
+          //Agrego al nuevo cliente a la lista de clientes
+          gestor.agregarCliente(nuevoCliente);
+          break;
+        case 3:
+          limpiarBuffer();
+          gestor.getListaClientes();
+          System.out.println("Seleccione el cliente a eliminar: ");
+          int i  = scanner.nextInt();
+          gestor.eliminarCliente(gestor.getCliente(i).getId());
+          break;
+        case 4:
+          limpiarBuffer();
+          MenuPrincipal();
+          break;
+        default:
+          System.out.println("Opcion invalida.");
+          break;
+      }
+    } while (opcion != 4);
+    
   }
 
   public int MenuPedidos() {
-    limpiarBuffer();
-    int opcion;
-
+    int opcion = 0;
+    do {
     System.out.println("\n---- Pedidos ----");
     System.out.println("1) Mostrar pedidos");
     System.out.println("2) Agregar pedido");
@@ -133,130 +186,163 @@ public class Menu {
     System.out.println("5) Atras");
 
     opcion = scanner.nextInt();
-    switch (opcion) {
-      case 1:
-        gestor.getListaPedidos();
-        break;
-      case 2:
-        subMenuPedidos();
-        break;
-      case 3:
-        gestor.getListaPedidos();
-        System.out.println("Seleccione el pedido: ");
-        int i = scanner.nextInt();
-        gestor.pedidoRealizado(gestor.getPedido(i).getId());
-        break;
-      case 4:
-        gestor.getListaPedidos();
-        System.out.println("Seleccione el pedido a eliminar: ");
-        int j = scanner.nextInt();
-        gestor.eliminarPedido(gestor.getPedido(j).getId());
-        break;
-      case 5:
-        MenuPrincipal();
-        break;
-      default:
-        System.out.println("Opcion invalida.");
-        break;
-    }
+      switch (opcion) {
+        case 1:
+          limpiarBuffer();
+          gestor.getListaPedidos();
+          break;
+        case 2:
+          limpiarBuffer();
+          subMenuPedidos();
+          break;
+        case 3:
+          limpiarBuffer();
+          gestor.getListaPedidos();
+          System.out.println("Seleccione el pedido: ");
+          int i = scanner.nextInt();
+
+          //Metodo para indicar que el pedido fue realizado y cambiar su estado a Realizado
+          gestor.pedidoRealizado(gestor.getPedido(i).getId());
+          break;
+        case 4:
+          limpiarBuffer();
+          gestor.getListaPedidos();
+          System.out.println("Seleccione el pedido a eliminar: ");
+          int j = scanner.nextInt();
+
+          //Metodo para eliminar pedido de la lista
+          gestor.eliminarPedido(gestor.getPedido(j).getId());
+          break;
+        case 5:
+          limpiarBuffer();
+          MenuPrincipal();
+          break;
+        default:
+          System.out.println("Opcion invalida.");
+          break;
+      }
+    } while (opcion !=5);
+    
 
     return scanner.nextInt();
   }
 
   public int subMenuPedidos() {
-    limpiarBuffer();
-    int opcion;
-    ArrayList<Producto> productos = new ArrayList<Producto>();
-
-    System.out.println("\n---- Agregar Pedido ----");
-    System.out.println("1) Agregar producto");
-    System.out.println("2) Quitar producto");
-    System.out.println("3) Finalizar pedido");
-    System.out.println("4) Atras");
+    int opcion = 0;
+    do {
+      System.out.println("\n---- Nuevo Pedido ----");
+      System.out.println("1) Agregar producto");
+      System.out.println("2) Quitar producto");
+      System.out.println("3) Finalizar pedido");
+      System.out.println("4) Atras");
 
     opcion = scanner.nextInt();
-    switch (opcion) {
-      case 1:
-        gestor.getListaProductos();
-        System.out.println("Seleccione el producto: ");
-        int i = scanner.nextInt();
-        productos.add(gestor.getProducto(i));
-        System.out.println("Producto agregado");
-        break;
-      case 2:
-        int j = 0;
+      switch (opcion) {
+        case 1:
+          limpiarBuffer();
+          gestor.getListaProductos();
+          System.out.println("Seleccione el producto: ");
+          int i = scanner.nextInt();
 
-        for (Producto producto : productos) {
-           j++;
+          //MEtodo para agregar un nuevo producto al pedido
+          gestor.agregarProductoPedido(gestor.getProducto(i));
+          System.out.println("Producto agregado");
+          break;
+        case 2:
+          limpiarBuffer();
+          int j = 0;
 
-          System.out.println(j + ")" + "\n" +
-          "Nombre: " + producto.getNombre() + "\n" +
-          "Precio: " + producto.getPrecio() + "\n");
-        };
-        System.out.println("Seleccione producto a quitar: ");
-        int k = scanner.nextInt();
-        productos.remove(k-1);
-        System.out.println("Producto eliminado");
-        break;
-      case 3:
-        Cliente clientePedido;
-        gestor.getListaClientes();
-        System.out.println("Seleccione el cliente: ");
-        clientePedido = gestor.getCliente(scanner.nextInt());
-        Pedido nuevoPedido = new Pedido(productos, clientePedido);
-        gestor.agregarPedido(nuevoPedido, clientePedido);
-        System.out.println("Nuevo pedido agregado.");
-      case 4:
-        MenuPrincipal();
-        break;
-      default:
-        System.out.println("Opcion invalida.");
-        break;
-    }
+          //ForEach para recorrer la lista de productos que hay en el pedido y mostrar sus datos para que el usuario seleccione el producto que desa quitar
+          for (Producto producto : gestor.getListaProductosPedido()) {
+             j++;
+  
+            System.out.println(j + ")" + "\n" +
+            "Nombre: " + producto.getNombre() + "\n" +
+            "Precio: " + producto.getPrecio() + "\n");
+          };
+          System.out.println("Seleccione producto a quitar: ");
+          int k = scanner.nextInt();
+
+          //Metodo que elimina el producto de la lista
+          gestor.eliminarProductoPedido(k);
+          System.out.println("Producto eliminado");
+          break;
+        case 3:
+          limpiarBuffer();
+          Cliente clientePedido; //Declaro un nuevo cliente para poder agregar el nuevo pedido
+          gestor.getListaClientes();
+
+          //Seleccion del cliente al que corresponde el nuevo pedido
+          System.out.println("Seleccione el cliente: ");
+          clientePedido = gestor.getCliente(scanner.nextInt()); //El cliente al que se le desea agregar el nuevo pedido es almacenado en la variable ClientePedido
+          gestor.agregarPedido(gestor.getListaProductosPedido(), clientePedido); //Metodo para agregar el nuevo pedido con su lista de productos y cliente seleccionado
+          gestor.resetListaPedido(); //Metodo para resetear la lista de productos y poder crear un nuevo pedido
+          System.out.println("Nuevo pedido agregado.");
+        case 4:
+          limpiarBuffer();
+          MenuPrincipal();
+          break;
+        default:
+          System.out.println("Opcion invalida.");
+          break;
+      }
+    } while (opcion != 4);
+    
     return scanner.nextInt();
   }
 
   public int MenuProductos() {
-    limpiarBuffer();
-    int opcion;
+    int opcion = 0;
+    do {
+      System.out.println("\n---- Productos ----");
+      System.out.println("1) Mostrar productos");
+      System.out.println("2) Agregar producto nuevo");
+      System.out.println("3) Eliminar producto");
+      System.out.println("4) Atras");
 
-    System.out.println("\n---- Productos ----");
-    System.out.println("1) Mostrar productos");
-    System.out.println("2) Agregar producto nuevo");
-    System.out.println("3) Eliminar producto");
-    System.out.println("4) Atras");
-
-    opcion = scanner.nextInt();
-    switch (opcion) {
-      case 1:
-        gestor.getListaProductos();
+      opcion = scanner.nextInt();
+      switch (opcion) {
+        case 1:
+          limpiarBuffer();
+          gestor.getListaProductos();
+          break;
+        case 2:
+          limpiarBuffer();
+          String nombre;
+          int precio;
+  
+          System.out.println("\nIngrese el nombre del producto: ");
+          nombre = scanner.nextLine();
+          System.out.println("\nIngrese el precio del producto: ");
+          precio = scanner.nextInt();
+  
+          //Creacion del nuevo producto a travez del constructor de la clase Producto
+          Producto nuevoProducto = new Producto(precio, nombre);
+  
+          gestor.agregarProducto(nuevoProducto); //Metodo para agregar el nuevo producto a la lista de productos disponibles
+          break;
+        case 3:
+          limpiarBuffer();
+          gestor.getListaProductos();
+          System.out.println("Seleccione el producto a eliminar: ");
+          int j = scanner.nextInt();
+          gestor.eliminarProducto(j); //Metodo para eliminar el producto seleccionado
         break;
-      case 2:
-        String nombre;
-        int precio;
-
-        System.out.println("\nIngrese el nombre del producto: ");
-        nombre = scanner.nextLine();
-        System.out.println("\nIngrese el precio del producto: ");
-        precio = scanner.nextInt();
-
-        Producto nuevoProducto = new Producto(precio, nombre);
-
-        gestor.agregarProducto(nuevoProducto);
-        break;
-      case 3:
-        gestor.getListaProductos();
-        System.out.println("Seleccione el producto a eliminar: ");
-        int j = scanner.nextInt();
-        gestor.eliminarProducto(j);
-      break;
-      default:
-        break;
-    }
+        case 4:
+          limpiarBuffer();
+          MenuPrincipal();
+          break;
+        default:
+          System.out.println("Opcion invalida");
+          break;
+      }
+    } while (opcion != 4);
+    
 
     return scanner.nextInt();
   }
 
+  //Metodo que limpia el buffer de scanner para poder obtener los nuevos ingresos por teclado del usuario
   public void limpiarBuffer() {
     scanner.nextLine();
   }
