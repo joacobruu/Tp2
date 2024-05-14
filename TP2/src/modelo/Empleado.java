@@ -1,6 +1,7 @@
 /* Clase Empleado que hereda metodos y atributos de la clase Persona */
 
 package modelo;
+
 public class Empleado extends Persona {
 
   private int salario;
@@ -17,10 +18,9 @@ public class Empleado extends Persona {
   @Override
   public String toString() {
     return "Nombre: " + getNombre() + "\n" +
-           "Direccion: " + getDireccion() + "\n" +
-           "Contacto: " + getContacto() + "\n" +
-           "Salario: " + getSalario();
+        "Direccion: " + getDireccion() + "\n" +
+        "Contacto: " + getContacto() + "\n" +
+        "Salario: " + getSalario();
   }
 
-  
 }

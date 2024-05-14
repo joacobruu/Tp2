@@ -1,6 +1,7 @@
 /* Clase Cliente que hereda metodos y atributos de la clase Persona */
 
 package modelo;
+
 import java.util.ArrayList;
 
 public class Cliente extends Persona {
@@ -19,9 +20,8 @@ public class Cliente extends Persona {
   @Override
   public String toString() {
     return "Cliente: " + getNombre() + "\n" +
-           "Direccion: " + getDireccion() + "\n" +
-           "Contacto:" + getContacto();
+        "Direccion: " + getDireccion() + "\n" +
+        "Contacto:" + getContacto();
   }
 
-  
 }
