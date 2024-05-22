@@ -1,10 +1,13 @@
 /* Clase Menu, esta clase se encarga del control del menu y la interaccion por teclado con el usuario */
 
-package scanner;
+package menu;
 
 import java.util.Scanner;
 
-import Gestor.Gestor;
+import Gestor.GestorCliente;
+import Gestor.GestorEmpleado;
+import Gestor.GestorPedido;
+import Gestor.GestorProducto;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Producto;
@@ -12,7 +15,10 @@ import modelo.Producto;
 public class Menu {
   private Scanner scanner = new Scanner(System.in); // Inicializo el Scanner para poder leer el input por teclado del
                                                     // usuario
-  private Gestor gestor = new Gestor(); // Inicializo la clase Gestor
+  private GestorCliente gestorCliente = new GestorCliente();
+  private GestorEmpleado gestorEmpleado = new GestorEmpleado();
+  private GestorPedido gestorPedido = new GestorPedido();
+  private GestorProducto gestorProducto = new GestorProducto();
 
   public Menu() {
     this.scanner = new Scanner(System.in);
@@ -82,7 +88,7 @@ public class Menu {
         case 1:
           limpiarBuffer();
           // Metodo para mostrar los empleados actuales
-          gestor.getListaEmpleados();
+          gestorEmpleado.getListaEmpleados();
           break;
         case 2:
           limpiarBuffer();
@@ -108,14 +114,14 @@ public class Menu {
           Empleado nuevoEmpleado = new Empleado(nombre, direccion, contacto, salario);
 
           // Agrego este nuevo empleado a la lista de empleados
-          gestor.agregarEmpleado(nuevoEmpleado);
+          gestorEmpleado.agregarEmpleado(nuevoEmpleado);
           break;
         case 3:
           limpiarBuffer();
-          gestor.getListaEmpleados();
+          gestorEmpleado.getListaEmpleados();
           System.out.println("Seleccione el empleado a eliminar: ");
           int i = scanner.nextInt(); // Inicializo una variable para poder saber que empleado selecciono el unsuario
-          gestor.eliminarEmpleado(gestor.getEmpleado(i).getId()); // Metodo para eliminar el empleado seleccionado
+          gestorEmpleado.eliminarEmpleado(gestorEmpleado.getEmpleado(i).getId()); // Metodo para eliminar el empleado seleccionado
           break;
         case 4:
           limpiarBuffer();
@@ -142,7 +148,7 @@ public class Menu {
       switch (opcion) {
         case 1:
           limpiarBuffer();
-          gestor.getListaClientes();
+          gestorCliente.getListaClientes();
           break;
         case 2:
           limpiarBuffer();
@@ -162,14 +168,14 @@ public class Menu {
           Cliente nuevoCliente = new Cliente(nombre, direccion, contacto);
 
           // Agrego al nuevo cliente a la lista de clientes
-          gestor.agregarCliente(nuevoCliente);
+          gestorCliente.agregarCliente(nuevoCliente);
           break;
         case 3:
           limpiarBuffer();
-          gestor.getListaClientes();
+          gestorCliente.getListaClientes();
           System.out.println("Seleccione el cliente a eliminar: ");
           int i = scanner.nextInt();
-          gestor.eliminarCliente(gestor.getCliente(i).getId());
+          gestorCliente.eliminarCliente(gestorCliente.getCliente(i).getId());
           break;
         case 4:
           limpiarBuffer();
@@ -197,7 +203,7 @@ public class Menu {
       switch (opcion) {
         case 1:
           limpiarBuffer();
-          gestor.getListaPedidos();
+          gestorPedido.getListaPedidos();
           break;
         case 2:
           limpiarBuffer();
@@ -205,22 +211,22 @@ public class Menu {
           break;
         case 3:
           limpiarBuffer();
-          gestor.getListaPedidos();
+          gestorPedido.getListaPedidos();
           System.out.println("Seleccione el pedido: ");
           int i = scanner.nextInt();
 
           // Metodo para indicar que el pedido fue realizado y cambiar su estado a
           // Realizado
-          gestor.pedidoRealizado(gestor.getPedido(i).getId());
+          gestorPedido.pedidoRealizado(gestorPedido.getPedido(i).getId());
           break;
         case 4:
           limpiarBuffer();
-          gestor.getListaPedidos();
+          gestorPedido.getListaPedidos();
           System.out.println("Seleccione el pedido a eliminar: ");
           int j = scanner.nextInt();
 
           // Metodo para eliminar pedido de la lista
-          gestor.eliminarPedido(gestor.getPedido(j).getId());
+          gestorPedido.eliminarPedido(gestorPedido.getPedido(j).getId());
           break;
         case 5:
           limpiarBuffer();
@@ -248,12 +254,12 @@ public class Menu {
       switch (opcion) {
         case 1:
           limpiarBuffer();
-          gestor.getListaProductos();
+          gestorProducto.getListaProductos();
           System.out.println("Seleccione el producto: ");
           int i = scanner.nextInt();
 
           // MEtodo para agregar un nuevo producto al pedido
-          gestor.agregarProductoPedido(gestor.getProducto(i));
+          gestorPedido.agregarProductoPedido(gestorProducto.getProducto(i));
           System.out.println("Producto agregado");
           break;
         case 2:
@@ -262,7 +268,7 @@ public class Menu {
 
           // ForEach para recorrer la lista de productos que hay en el pedido y mostrar
           // sus datos para que el usuario seleccione el producto que desa quitar
-          for (Producto producto : gestor.getListaProductosPedido()) {
+          for (Producto producto : gestorPedido.getListaProductosPedido()) {
             j++;
 
             System.out.println(j + ")" + "\n" +
@@ -274,22 +280,22 @@ public class Menu {
           int k = scanner.nextInt();
 
           // Metodo que elimina el producto de la lista
-          gestor.eliminarProductoPedido(k);
+          gestorPedido.eliminarProductoPedido(k);
           System.out.println("Producto eliminado");
           break;
         case 3:
           limpiarBuffer();
           Cliente clientePedido; // Declaro un nuevo cliente para poder agregar el nuevo pedido
-          gestor.getListaClientes();
+          gestorCliente.getListaClientes();
 
           // Seleccion del cliente al que corresponde el nuevo pedido
           System.out.println("Seleccione el cliente: ");
-          clientePedido = gestor.getCliente(scanner.nextInt()); // El cliente al que se le desea agregar el nuevo pedido
+          clientePedido = gestorCliente.getCliente(scanner.nextInt()); // El cliente al que se le desea agregar el nuevo pedido
                                                                 // es almacenado en la variable ClientePedido
-          gestor.agregarPedido(gestor.getListaProductosPedido(), clientePedido); // Metodo para agregar el nuevo pedido
+          gestorPedido.agregarPedido(gestorPedido.getListaProductosPedido(), clientePedido); // Metodo para agregar el nuevo pedido
                                                                                  // con su lista de productos y cliente
                                                                                  // seleccionado
-          gestor.resetListaPedido(); // Metodo para resetear la lista de productos y poder crear un nuevo pedido
+          gestorPedido.resetListaPedido(); // Metodo para resetear la lista de productos y poder crear un nuevo pedido
           System.out.println("Nuevo pedido agregado.");
         case 4:
           limpiarBuffer();
@@ -317,7 +323,7 @@ public class Menu {
       switch (opcion) {
         case 1:
           limpiarBuffer();
-          gestor.getListaProductos();
+          gestorProducto.getListaProductos();
           break;
         case 2:
           limpiarBuffer();
@@ -332,15 +338,15 @@ public class Menu {
           // Creacion del nuevo producto a travez del constructor de la clase Producto
           Producto nuevoProducto = new Producto(precio, nombre);
 
-          gestor.agregarProducto(nuevoProducto); // Metodo para agregar el nuevo producto a la lista de productos
+          gestorProducto.agregarProducto(nuevoProducto); // Metodo para agregar el nuevo producto a la lista de productos
                                                  // disponibles
           break;
         case 3:
           limpiarBuffer();
-          gestor.getListaProductos();
+          gestorProducto.getListaProductos();
           System.out.println("Seleccione el producto a eliminar: ");
           int j = scanner.nextInt();
-          gestor.eliminarProducto(j); // Metodo para eliminar el producto seleccionado
+          gestorProducto.eliminarProducto(j); // Metodo para eliminar el producto seleccionado
           break;
         case 4:
           limpiarBuffer();

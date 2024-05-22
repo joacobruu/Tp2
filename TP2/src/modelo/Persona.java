@@ -4,7 +4,7 @@ package modelo;
 
 import java.util.UUID;
 
-public class Persona {
+public abstract class Persona {
   private UUID id;
   private String nombre;
   private String direccion;
