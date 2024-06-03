@@ -19,7 +19,7 @@ public class GestorPedido {
 
    // Metodo para mostrar en pantalla cada uno de los pedidos en la lista con su
   // informacion
-  public void getListaPedidos() {
+  public void getLista() {
     int i = 0;
     for (Pedido pedido : listaPedidos) {
       i++;
@@ -70,22 +70,22 @@ public class GestorPedido {
   }
 
   // Metodo para agregar un nuevo producto a la lista de productos en el pedido
-  public void agregarProductoPedido(Producto producto) {
+  public void agregarProducto(Producto producto) {
     listaProductosPedido.add(producto);
   }
 
   // Metodo para obtener la lista de productos en el Pedido
-  public ArrayList<Producto> getListaProductosPedido() {
+  public ArrayList<Producto> getListaProductos() {
     return listaProductosPedido;
   }
 
   // Metodo para eliminar un producto del Pedido
-  public void eliminarProductoPedido(int i) {
+  public void eliminarProducto(int i) {
     listaProductosPedido.remove(i - 1);
   }
 
   // Metodo para volver a iniciar la lista de productos en un pedido
-  public void resetListaPedido() {
+  public void resetLista() {
     listaProductosPedido = new ArrayList<Producto>();
   }
 }

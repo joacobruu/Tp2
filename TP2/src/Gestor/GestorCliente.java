@@ -13,7 +13,7 @@ public class GestorCliente {
   }
 
    // Metodo que devuelve la lista de clientes
-  public void getListaClientes() {
+  public void getLista() {
     int i = 0;
 
     // ForEach que recorre la lista de clientes y muestra en pantalla los datos de

@@ -5,12 +5,12 @@ package modelo;
 import java.util.UUID;
 
 public class Producto {
-  private UUID id;
+  private static UUID id;
   private int precio;
   private String nombre;
 
   public Producto(int precio, String nombre) {
-    this.id = UUID.randomUUID();
+    Producto.id = UUID.randomUUID();
     this.precio = precio;
     this.nombre = nombre;
   }

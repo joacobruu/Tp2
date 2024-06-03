@@ -12,7 +12,7 @@ public class GestorProducto {
   }
 
   // Metodo para mostrar en consola la lista de productos y su informacion
-  public void getListaProductos() {
+  public void getLista() {
     int i = 0;
 
     for (Producto producto : listaProductos) {

@@ -5,13 +5,13 @@ package modelo;
 import java.util.UUID;
 
 public abstract class Persona {
-  private UUID id;
+  private static UUID id;
   private String nombre;
   private String direccion;
   private int contacto;
 
   public Persona(String nombre, String direccion, int contacto) {
-    this.id = UUID.randomUUID();
+    Persona.id = UUID.randomUUID();
     this.nombre = nombre;
     this.direccion = direccion;
     this.contacto = contacto;

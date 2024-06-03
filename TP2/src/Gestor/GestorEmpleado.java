@@ -13,7 +13,7 @@ public class GestorEmpleado {
   }
 
   // Metodo que devuelve la lista de empleados
-  public void getListaEmpleados() {
+  public void getLista() {
     int i = 0;
 
     // ForEach que recorre la lista de empleados y muestra en pantalla los datos de
