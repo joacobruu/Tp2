@@ -2,6 +2,7 @@
 
 package menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Gestor.GestorCliente;
@@ -39,7 +40,15 @@ public class Menu {
       System.out.println("4) Productos");
       System.out.println("5) Salir");
       System.out.println(" Eliga una opcion:");
-      opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+
+      try {
+        opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+      } catch (InputMismatchException e) {
+        System.out.println("Debe ingresar un numero");
+        System.out.println(e);
+        break;
+      }
+      
 
       // Switch para las distintas opciones del menu acorde al input del usuario y
       // poder acceder a los distintos sub-menus y sus opciones
@@ -83,7 +92,13 @@ public class Menu {
       System.out.println("3) Borrar empleado");
       System.out.println("4) Atras");
 
-      opcion = scanner.nextInt();
+      try {
+        opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+      } catch (InputMismatchException e) {
+        System.out.println("Debe ingresar un numero");
+        System.out.println(e);
+        break;
+      }
       switch (opcion) {
         case 1:
           limpiarBuffer();
@@ -105,9 +120,21 @@ public class Menu {
           System.out.println("\nIngrese la direccion: ");
           direccion = scanner.nextLine();
           System.out.println("\nIngrese un telefono de contacto: ");
-          contacto = scanner.nextInt();
+          try {
+            contacto = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
           System.out.println("\nIngrese el salario: ");
-          salario = scanner.nextInt();
+          try {
+            salario = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // Una vez obtenidos cada uno de los datos, creo un nuevo empleado a travez del
           // contructor de la clase Empleado
@@ -120,7 +147,14 @@ public class Menu {
           limpiarBuffer();
           gestorEmpleado.getLista();
           System.out.println("Seleccione el empleado a eliminar: ");
-          int i = scanner.nextInt(); // Inicializo una variable para poder saber que empleado selecciono el unsuario
+          int i; // Inicializo una variable para poder saber que empleado selecciono el unsuario
+          try {
+            i = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
           gestorEmpleado.eliminarEmpleado(gestorEmpleado.getEmpleado(i).getId()); // Metodo para eliminar el empleado seleccionado
           break;
         case 4:
@@ -144,7 +178,13 @@ public class Menu {
       System.out.println("3) Borrar cliente");
       System.out.println("4) Atras");
 
-      opcion = scanner.nextInt();
+      try {
+        opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+      } catch (InputMismatchException e) {
+        System.out.println("Debe ingresar un numero");
+        System.out.println(e);
+        break;
+      }
       switch (opcion) {
         case 1:
           limpiarBuffer();
@@ -161,7 +201,13 @@ public class Menu {
           System.out.println("\nIngrese la direccion: ");
           direccion = scanner.nextLine();
           System.out.println("\nIngrese un telefono de contacto: ");
-          contacto = scanner.nextInt();
+          try {
+            contacto = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // Una vez obtenidos los datos creo un nuevo cliente a partir del constructor de
           // la clase Cliente
@@ -174,7 +220,14 @@ public class Menu {
           limpiarBuffer();
           gestorCliente.getLista();
           System.out.println("Seleccione el cliente a eliminar: ");
-          int i = scanner.nextInt();
+          int i;
+          try {
+            i = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
           gestorCliente.eliminarCliente(gestorCliente.getCliente(i).getId());
           break;
         case 4:
@@ -199,7 +252,13 @@ public class Menu {
       System.out.println("4) Eliminar pedido");
       System.out.println("5) Atras");
 
-      opcion = scanner.nextInt();
+      try {
+        opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+      } catch (InputMismatchException e) {
+        System.out.println("Debe ingresar un numero");
+        System.out.println(e);
+        break;
+      }
       switch (opcion) {
         case 1:
           limpiarBuffer();
@@ -213,7 +272,14 @@ public class Menu {
           limpiarBuffer();
           gestorPedido.getLista();
           System.out.println("Seleccione el pedido: ");
-          int i = scanner.nextInt();
+          int i;
+          try {
+            i = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // Metodo para indicar que el pedido fue realizado y cambiar su estado a
           // Realizado
@@ -223,7 +289,14 @@ public class Menu {
           limpiarBuffer();
           gestorPedido.getLista();
           System.out.println("Seleccione el pedido a eliminar: ");
-          int j = scanner.nextInt();
+          int j;
+          try {
+            j = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // Metodo para eliminar pedido de la lista
           gestorPedido.eliminarPedido(gestorPedido.getPedido(j).getId());
@@ -250,13 +323,26 @@ public class Menu {
       System.out.println("3) Finalizar pedido");
       System.out.println("4) Atras");
 
-      opcion = scanner.nextInt();
+      try {
+        opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+      } catch (InputMismatchException e) {
+        System.out.println("Debe ingresar un numero");
+        System.out.println(e);
+        break;
+      }
       switch (opcion) {
         case 1:
           limpiarBuffer();
           gestorProducto.getLista();
           System.out.println("Seleccione el producto: ");
-          int i = scanner.nextInt();
+          int i;
+          try {
+            i = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // MEtodo para agregar un nuevo producto al pedido
           gestorPedido.agregarProducto(gestorProducto.getProducto(i));
@@ -277,7 +363,14 @@ public class Menu {
           }
           ;
           System.out.println("Seleccione producto a quitar: ");
-          int k = scanner.nextInt();
+          int k;
+          try {
+            k = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // Metodo que elimina el producto de la lista
           gestorPedido.eliminarProducto(k);
@@ -290,7 +383,15 @@ public class Menu {
 
           // Seleccion del cliente al que corresponde el nuevo pedido
           System.out.println("Seleccione el cliente: ");
-          clientePedido = gestorCliente.getCliente(scanner.nextInt()); // El cliente al que se le desea agregar el nuevo pedido
+          int cliente;
+          try {
+            cliente = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
+          clientePedido = gestorCliente.getCliente(cliente); // El cliente al que se le desea agregar el nuevo pedido
                                                                 // es almacenado en la variable ClientePedido
           gestorPedido.agregarPedido(gestorPedido.getListaProductos(), clientePedido); // Metodo para agregar el nuevo pedido
                                                                                  // con su lista de productos y cliente
@@ -319,7 +420,13 @@ public class Menu {
       System.out.println("3) Eliminar producto");
       System.out.println("4) Atras");
 
-      opcion = scanner.nextInt();
+      try {
+        opcion = scanner.nextInt(); // Leo el input que realizo el usuario
+      } catch (InputMismatchException e) {
+        System.out.println("Debe ingresar un numero");
+        System.out.println(e);
+        break;
+      }
       switch (opcion) {
         case 1:
           limpiarBuffer();
@@ -333,7 +440,13 @@ public class Menu {
           System.out.println("\nIngrese el nombre del producto: ");
           nombre = scanner.nextLine();
           System.out.println("\nIngrese el precio del producto: ");
-          precio = scanner.nextInt();
+          try {
+            precio = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
 
           // Creacion del nuevo producto a travez del constructor de la clase Producto
           Producto nuevoProducto = new Producto(precio, nombre);
@@ -345,7 +458,14 @@ public class Menu {
           limpiarBuffer();
           gestorProducto.getLista();
           System.out.println("Seleccione el producto a eliminar: ");
-          int j = scanner.nextInt();
+          int j;
+          try {
+            j = scanner.nextInt(); // Leo el input que realizo el usuario
+          } catch (InputMismatchException e) {
+            System.out.println("Debe ingresar un numero");
+            System.out.println(e);
+            break;
+          }
           gestorProducto.eliminarProducto(j); // Metodo para eliminar el producto seleccionado
           break;
         case 4:
